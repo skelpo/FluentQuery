@@ -171,6 +171,16 @@ public class FluentQuery: FQPart, CustomStringConvertible {
     }
     
     @discardableResult
+    public func `where`(_ where: FQPredicateGenericType...) -> Self {
+        if let w = self.`where` {
+            w.joinAnotherInstance(FQWhere(`where`), by: "AND")
+        } else {
+            self.`where` = FQWhere(`where`)
+        }
+        return self
+    }
+    
+    @discardableResult
     public func having(_ where: FQWhere) -> Self {
         if let w = self.having {
             w.joinAnotherInstance(`where`, by: "AND")
