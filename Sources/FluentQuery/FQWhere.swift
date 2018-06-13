@@ -10,13 +10,17 @@ public class FQWhere: FQPart {
         }
     }
     
-    public init(_ predicates: FQPredicateGenericType...) {
+    public init(_ predicates: [FQPredicateGenericType]) {
         for (index, predicate) in predicates.enumerated() {
             if index > 0 {
                 wheres.append("AND")
             }
             wheres.append(predicate)
         }
+    }
+    
+    public convenience init(_ predicates: FQPredicateGenericType...) {
+        self.init(predicates)
     }
     
     @discardableResult
